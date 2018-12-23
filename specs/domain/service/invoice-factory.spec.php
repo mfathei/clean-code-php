@@ -2,6 +2,8 @@
 
 use CleanPhp\Invoicer\Domain\Entity\Order;
 use CleanPhp\Invoicer\Domain\Factory\InvoiceFactory;
+use CleanPhp\Invoicer\Domain\Service\InvoicingService;
+use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
 
 describe('InvoiceFactory', function () {
     describe('->createFromOrder', function () {
@@ -46,4 +48,23 @@ describe('InvoiceFactory', function () {
             expect($invoice->getInvoiceDate())->to->be->instanceof('DateTime');
         });
     });
+});
+
+describe('InvoicingService', function () {
+    beforeEach(function () {
+        $repo = 'CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface';
+        $this->repository = $this->getProphet()->prophesize($repo);
+    });
+
+    afterEach(function () {
+        $this->getProphet()->checkPredictions();
+    });
+
+    it('should query repository for uninvoiced Orders', function () {
+        $this->repository->getUninvoicedOrders()->shouldBeCalled();
+        $service = new InvoicingService($this->repository->reveal());
+        $service->generateInvoices();
+    });
+
+    it('should return an Invoice for each uninvoiced Order');
 });
