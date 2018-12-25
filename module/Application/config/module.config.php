@@ -12,6 +12,11 @@ use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
+/**
+ * Disable Deprecated warnings
+ */
+ini_set("error_reporting", E_ALL & ~E_USER_DEPRECATED);
+
 return [
     'controllers' => [
         'invokables' => [
