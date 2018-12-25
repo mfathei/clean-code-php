@@ -9,7 +9,6 @@ use CleanPhp\Invoicer\Persistence\Zend\DataTable\OrderTable;
 use CleanPhp\Invoicer\Persistence\Zend\TableGateway\TableGatewayFactory;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\AdapterServiceFactory;
-use Zend\Hydrator\ClassMethods;
 
 /**
  * Global Configuration Override

@@ -26,3 +26,5 @@ INSERT INTO customers(name, email) VALUES('Acme Corp', 'ap@acme.com');
 INSERT INTO customers(name, email) VALUES('ABC Company', 'invoices@abc.com');
 </pre>
 
+### run embedded server
+`COMPOSER_PROCESS_TIMEOUT=6000 composer run serve`
