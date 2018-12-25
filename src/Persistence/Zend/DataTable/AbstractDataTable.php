@@ -7,7 +7,7 @@ use CleanPhp\Invoicer\Domain\Repository\RepositoryInterface;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Hydrator\HydratorInterface;
 
-class AbstractDatatable implements RepositoryInterface
+class AbstractDataTable implements RepositoryInterface
 {
     protected $gateway;
     protected $hydrator;
@@ -18,7 +18,7 @@ class AbstractDatatable implements RepositoryInterface
         $this->hydrator = $hydrator;
     }
 
-    public function getBYId($id)
+    public function getById($id)
     {
         $result = $this->gateway->select(['id' => intval($id)])->current();
         return $result ? $result : false;

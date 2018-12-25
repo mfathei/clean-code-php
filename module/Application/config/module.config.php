@@ -15,8 +15,8 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'controllers' => [
         'invokables' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Customers' => 'Application\Controller\CustomersController',
+            'Controller\Index' => 'Controller\IndexController',
+            'Controller\Customers' => 'Controller\CustomersController',
         ],
     ],
     'router' => [
@@ -26,7 +26,7 @@ return [
                 'options' => [
                     'route' => '/',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => Controller\IndexController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -36,7 +36,7 @@ return [
                 'options' => [
                     'route' => '/customers',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Customers',
+                        'controller' => 'Controller\Customers',
                         'action' => 'index',
                     ],
                 ],
@@ -46,7 +46,7 @@ return [
                 'options' => [
                     'route' => '/orders',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Orders',
+                        'controller' => 'Controller\Orders',
                         'action' => 'index',
                     ],
                 ],
@@ -56,7 +56,7 @@ return [
                 'options' => [
                     'route' => '/invoices',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Invoices',
+                        'controller' => 'Controller\Invoices',
                         'action' => 'index',
                     ],
                 ],
@@ -66,7 +66,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            'Application\Controller\Customers' => function ($sm) {
+            'Controller\Customers' => function ($sm) {
                 return new CustomersController(
                     $sm->getServiceLocator()->get('CustomerTable')
                 );

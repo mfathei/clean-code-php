@@ -9,6 +9,8 @@ use CleanPhp\Invoicer\Persistence\Zend\DataTable\OrderTable;
 use CleanPhp\Invoicer\Persistence\Zend\TableGateway\TableGatewayFactory;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\AdapterServiceFactory;
+use Zend\Hydrator\ClassMethodsHydrator;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 /**
  * Global Configuration Override
@@ -28,7 +30,7 @@ return [
             Adapter::class => AdapterServiceFactory::class,
             "CustomerTable" => function ($sm) {
                 $factory = new TableGatewayFactory();
-                $hydrator = new ClassMethods();
+                $hydrator = new ClassMethodsHydrator();
 
                 return new CustomerTable(
                     $factory->createGateway(
