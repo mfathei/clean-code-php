@@ -7,73 +7,86 @@
 
 namespace Application;
 
+use Application\Controller\CustomersController;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'router' => [
+    'controllers'  => [
+        'invokables' => [
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+        ],
+    ],
+    'factories'    => [
+        'Application\Controller\Customers' => function ($sm) {
+            return new CustomersController(
+                $sm->getServiceLocator()->get('CustomerTable')
+            );
+        },
+    ],
+    'router'       => [
         'routes' => [
-            'home' => [
-                'type' => Literal::class,
+            'home'      => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => [
                         'controller' => 'Application\Controller\Index',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ],
                 ],
             ],
             'customers' => [
-                'type' => Segment::class,
+                'type'    => Segment::class,
                 'options' => [
-                    'route' => '/customers',
+                    'route'    => '/customers',
                     'defaults' => [
                         'controller' => 'Application\Controller\Customers',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ],
                 ],
             ],
-            'orders' => [
-                'type' => Segment::class,
+            'orders'    => [
+                'type'    => Segment::class,
                 'options' => [
-                    'route' => '/orders',
+                    'route'    => '/orders',
                     'defaults' => [
                         'controller' => 'Application\Controller\Orders',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ],
                 ],
             ],
-            'invoices' => [
-                'type' => Segment::class,
+            'invoices'  => [
+                'type'    => Segment::class,
                 'options' => [
-                    'route' => '/invoices',
+                    'route'    => '/invoices',
                     'defaults' => [
                         'controller' => 'Application\Controller\Invoices',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ],
                 ],
             ],
         ],
     ],
-    'controllers' => [
+    'controllers'  => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => [
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map'             => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
     ],
