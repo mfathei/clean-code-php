@@ -1,5 +1,7 @@
 {
-    
+    "config": {
+        "process-timeout": 6000
+    },
     "require-dev": {
         "peridot-php/peridot": "^1.19",
         "peridot-php/leo": "^1.6",
