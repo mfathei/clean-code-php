@@ -1,6 +1,6 @@
 {
     "config": {
-        "process-timeout": 6000
+        "process-timeout": 5184000
     },
     "require-dev": {
         "peridot-php/peridot": "^1.19",
@@ -13,7 +13,9 @@
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-development-mode": "^3.0",
         "zendframework/zend-hydrator": "^3.0",
-        "zendframework/zend-db": "^2.9"
+        "zendframework/zend-db": "^2.9",
+        "zendframework/zend-inputfilter": "^2.9",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.1"
     },
     "autoload":{
         "psr-4": {

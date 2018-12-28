@@ -8,9 +8,12 @@
 namespace Application;
 
 use Application\Controller\CustomersController;
+use CleanPhp\Invoicer\Service\InputFilter\CustomerInputFilter;
+use Zend\Hydrator\ClassMethodsHydrator;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Disable Deprecated warnings
@@ -45,6 +48,18 @@ return [
                         'action' => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'create' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => '/new',
+                            'defaults' => [
+                                'action' => 'new'
+                            ]
+                        ]
+                    ]
+                ]
             ],
             'orders' => [
                 'type' => Segment::class,
@@ -73,10 +88,20 @@ return [
             Controller\IndexController::class => InvokableFactory::class,
             'Controller\Customers' => function ($sm) {
                 return new CustomersController(
-                    $sm->getServiceLocator()->get('CustomerTable')
+                    $sm->getServiceLocator()->get('CustomerTable'),
+                    new CustomerInputFilter(),
+                    new ClassMethodsHydrator()
                 );
             },
         ],
+    ],
+    'view_helpers' => [
+        'aliases' => [
+            'validationErrors' => View\Helper\ValidationErrors::class,
+        ],
+        'factories' => [
+            View\Helper\ValidationErrors::class => InvokableFactory::class,
+        ]
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
