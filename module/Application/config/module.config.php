@@ -80,7 +80,7 @@ return [
             'orders' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/orders',
+                    'route' => '/orders[/:action[/:id]]',
                     'defaults' => [
                         'controller' => 'Controller\Orders',
                         'action' => 'index',
