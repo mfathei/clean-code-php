@@ -8,6 +8,7 @@
 namespace Application;
 
 use Application\Controller\CustomersController;
+use Application\Controller\OrdersController;
 use CleanPhp\Invoicer\Service\InputFilter\CustomerInputFilter;
 use Zend\Hydrator\ClassMethodsHydrator;
 use Zend\Router\Http\Literal;
@@ -108,6 +109,11 @@ return [
                     new ClassMethodsHydrator()
                 );
             },
+            'Controller\Orders' => function ($sm) {
+                return new OrdersController(
+                    $sm->getServiceLocator()->get('OrderTable')
+                );
+            }
         ],
     ],
     'view_helpers' => [

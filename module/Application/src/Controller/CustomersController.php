@@ -17,6 +17,8 @@ use Zend\View\Model\ViewModel;
 class CustomersController extends AbstractActionController
 {
     protected $customerRepository;
+    protected $inputFilter;
+    protected $hydrator;
 
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
